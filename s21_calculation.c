@@ -7,7 +7,6 @@ double s21_callculation(char *ex_str, int *status, double x) {
   list_value *list_val = NULL;
   char str_value[MAX_NUM] = {0};
   int j = 0;
-  int str_have_value = 0;
   memset(str_value, ' ', MAX_NUM);
   while (*ex_str != '\0') {
     if (isdigit(*ex_str) || *ex_str == '.' || *ex_str == 'x') {
@@ -27,15 +26,11 @@ double s21_callculation(char *ex_str, int *status, double x) {
         list_val = s21_push_value(list_val, x);
         ex_str++;
       }
-      str_have_value = 1;
     } else {
       list_val = s21_func(list_val, *ex_str, status);
       ex_str++;
     }
     ex_str++;
-  }
-  if(str_have_value == 0) {
-    *status =1;
   }
   if (*status != 1 && list_val != NULL) {
     result = list_val->value;
