@@ -29,7 +29,7 @@ install:
 	cd Qmake/ && qmake ../Smart_Calc.pro && make 
 	
 open:
-	open Qmake/Smart_Calc.app
+	cd Qmake/ && ./Smart_Calc
 
 uninstall:
 	rm -rf Qmake
