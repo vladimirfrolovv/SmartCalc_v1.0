@@ -10,9 +10,6 @@ char *s21_parse(char *str, char *ex_str, int *status) {
   list *list_op = NULL;
   if (str != NULL) {
     while (*str != '\0' && *status != 1) {
-        if(*str == ' ' ) {
-            *str++;
-        } else {
       if ((flag_func && *str != '(') || *str == '.') {
         *status = 1;
         break;
@@ -32,7 +29,6 @@ char *s21_parse(char *str, char *ex_str, int *status) {
         }
       }
       i = s21_parse_number(ex_str, &str, status, i, &double_op, &flag_point);
-      if (*str != ' '){
       list_op = s21_parse_op(list_op, ex_str, &str, status, &i, &flag_op,
                              &double_op, &number_of_brack);
       list_op = s21_parse_func(list_op, &str, &flag_op, &flag_func, status,
@@ -40,8 +36,6 @@ char *s21_parse(char *str, char *ex_str, int *status) {
       if (*str != '\0') {
         str++;
       }
-      }
-    }
     }
     while (list_op != NULL) {
       ex_str[i] = list_op->elem;
