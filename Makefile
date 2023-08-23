@@ -3,9 +3,21 @@ CFLAGS=-Wall -Werror -Wextra
 GCOVFLAGS = -fprofile-arcs -ftest-coverage
 SRCS=$(wildcard s21_*.c)
 OBJS=$(SRCS:.c=.o)
-TESTSFLAGS_MAC= -lcheck 
+TESTSFLAGS_MAC= -lcheck
 # -lpthread -lsubunit -lrt -lm
 LIB_NAME=smart_calc
+
+UNAME = $(shell uname)
+
+OPEN :=
+
+ifeq ($(UNAME), Linux)
+	OPEN += cd Qmake/ && ./Smart_Calc
+endif
+
+ifeq ($(UNAME), Darwin)
+	OPEN += open Qmake/Smart_Calc.app/Contents/MacOS/./Smart_Calc
+endif
 
 all: install
 
@@ -29,7 +41,7 @@ install:
 	cd Qmake/ && qmake ../Smart_Calc.pro && make 
 	
 open:
-	cd Qmake/ && ./Smart_Calc
+	$(OPEN)
 
 uninstall:
 	rm -rf Qmake
